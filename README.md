@@ -1,3 +1,2 @@
-# cse163
-### Final Project
+# cse163: Final Project
 ### Authors: Eunji Shin, Sunghee Park, Sooho Park
