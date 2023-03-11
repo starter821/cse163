@@ -11,7 +11,7 @@ Charts.py; incident.csv, criminal.csv, unemployment.csv imports all 3 datasets f
 All modules will be installed as user clicks run. 
 
 ## In charts.py
-chart.py importing all qx_data.py to visualize.
+chart.py importing all qx_data.py for visualization.
 
 Question 1: User can use slider to set the range of data on the graph.
 
