@@ -1,4 +1,5 @@
-# cse163: Final Project
+# CSE163: Analyzing the relationships between gun violence, violent crimes, and unemployment rate
+
 ### Authors: Eunji Shin, Sunghee Park, Sooho Park
 
 ### Files
@@ -7,7 +8,7 @@ Charts.py imports all 3 datasets files to make charts.
 
 
 ### Instruction
-All modules will be installed as user click run. 
+All modules will be installed as user click run.
 
 Question 1: User can use slider to set the range of data on the graph.
 
