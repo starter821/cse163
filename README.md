@@ -11,8 +11,8 @@ Question 1:
 
 Question 2:
 
-Question 3: We provided a search bar that user can type year they want to see the pie chart.
-            Run following Moduel.
+Question 3: We provided a search bar that user can type year they want to see the pie chart. \n
+            Run following Module.
             
             import pandas as pd
             import plotly.express as px
