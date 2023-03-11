@@ -70,94 +70,89 @@ state_dict = {
     'Wyoming': 'WY'
 }
 
-# A function that will help us 
+
 def convert_state(state_name):
-     return state_dict.get(state_name)
+    return state_dict.get(state_name)
 
-# parsing datasets
-gun_violence_df = pd.read_csv('/incident.csv')
-violent_crime_df = pd.read_csv('/state_crime.csv')
 
-# separate Incident_Date from YYYY-MM-DD to year, month, and day
-gun_violence_df['Year'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).year
-gun_violence_df['Month'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).month
-gun_violence_df['Day'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).day
+def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame) -> None:
+    # filter both dataframe so it only contains data in 2018
+    gun_violence_year = gun_violence_df['year'] == 2018
+    violent_crime_year = violent_crime_df['Year'] == 2018
 
-# filter both dataframe so it only contains data in 2018
-gun_violence_year = (gun_violence_df['Year'] == 2018)
-violent_crime_year = (violent_crime_df['Year'] == 2018)
+    # take only necessary columns
+    gun_violence_df = gun_violence_df[gun_violence_year]
+    gun_violence_df = gun_violence_df.groupby(
+        'State_Code')['Killed', 'Injured'].sum()
+    gun_violence_df['gun_total'] = gun_violence_df['Killed'] + \
+        gun_violence_df['Injured']
+    gun_violence = gun_violence_df.loc[:, ['gun_total']]
 
-# take only necessary columns
-gun_violence_df = gun_violence_df[gun_violence_year]
-gun_violence_df = gun_violence_df.groupby('State_Code')['Killed', 'Injured'].sum()
-gun_violence_df['gun_total'] = gun_violence_df['Killed'] + gun_violence_df['Injured']
-gun_violence = gun_violence_df.loc[:, ['gun_total']]
+    violent_crime_df = violent_crime_df[violent_crime_year]
+    violent_crime_df = violent_crime_df.loc[:, [
+        'State', 'Data.Rates.Violent.All']]
+    violent_crime_df['State'] = violent_crime_df['State'].apply(convert_state)
+    violent_crime = violent_crime_df.dropna()
 
-violent_crime_df = violent_crime_df[violent_crime_year]
-violent_crime_df = violent_crime_df.loc[:, ['State', 'Data.Rates.Violent.All']]
-violent_crime_df['State'] = violent_crime_df['State'].apply(convert_state)
-violent_crime = violent_crime_df.dropna()
+    crime_gun_merged = violent_crime.merge(
+        gun_violence, left_on='State', right_on='State_Code')
+    crime_gun_merged['Total'] = crime_gun_merged['gun_total'] + \
+        crime_gun_merged['Data.Rates.Violent.All']
+    crime_gun_merged = crime_gun_merged.loc[:, ['State', 'Total']]
 
-crime_gun_merged = violent_crime.merge(gun_violence, left_on='State', right_on='State_Code')
-crime_gun_merged['Total'] = crime_gun_merged['gun_total'] + crime_gun_merged['Data.Rates.Violent.All']
-crime_gun_merged = crime_gun_merged.loc[:, ['State', 'Total']]
-top_5_dangerous = crime_gun_merged.nlargest(5, 'Total')
-top_5_safest = crime_gun_merged.nsmallest(5, 'Total')
+    top_5_dangerous = crime_gun_merged.nlargest(5, 'Total')
+    top_5_safest = crime_gun_merged.nsmallest(5, 'Total')
 
-options = ['Safest', 'Most Dangerous']
+    options = ['Safest', 'Most Dangerous']
 
-# Define a dictionary that maps the options to the corresponding top 5 data frames
-data_frames = {
-    'Safest': crime_gun_merged.nsmallest(5, 'Total'),
-    'Most Dangerous': crime_gun_merged.nlargest(5, 'Total')
-}
+    # Define a dictionary that maps the options to the corresponding top 5 data frames
+    data_frames = {
+        'Safest': crime_gun_merged.nsmallest(5, 'Total'),
+        'Most Dangerous': crime_gun_merged.nlargest(5, 'Total')
+    }
 
-# Define the initial data frame to display
-current_df = data_frames['Safest']
+    # Define the initial data frame to display
+    current_df = data_frames['Safest']
 
-# Define the layout for the interactive bar chart
-layout = go.Layout(
-    title='Top 5 Safest or Most Dangerous States',
-    xaxis=dict(title='State'),
-    yaxis=dict(title='Total Incidents'),
-    updatemenus=[
-        dict(
-            buttons=list([
-                dict(
-                    label='Safest',
-                    method='update',
-                    args=[{'y': [current_df['Total']],
-                           'x': [current_df['State']],
-                           'type': 'bar',
-                           'name': 'Total Incidents'}]),
-                dict(
-                    label='Most Dangerous',
-                    method='update',
-                    args=[{'y': [data_frames['Most Dangerous']['Total']],
-                           'x': [data_frames['Most Dangerous']['State']],
-                           'type': 'bar',
-                           'name': 'Total Incidents'}])
-            ]),
-            type='buttons',
-            direction='right',
-            showactive=True
-        )
-    ]
-)
+    # Define the layout for the interactive bar chart
+    layout = go.Layout(
+        title='Top 5 Safest or Most Dangerous States',
+        xaxis=dict(title='State'),
+        yaxis=dict(title='Total Incidents'),
+        updatemenus=[
+            dict(
+                buttons=list([
+                    dict(
+                        label='Safest',
+                        method='update',
+                        args=[{'y': [current_df['Total']],
+                              'x': [current_df['State']],
+                               'type': 'bar',
+                               'name': 'Total Incidents'}]),
+                    dict(
+                        label='Most Dangerous',
+                        method='update',
+                        args=[{'y': [data_frames['Most Dangerous']['Total']],
+                              'x': [data_frames['Most Dangerous']['State']],
+                               'type': 'bar',
+                               'name': 'Total Incidents'}])
+                ]),
+                type='buttons',
+                direction='right',
+                showactive=True
+            )
+        ]
+    )
 
-# Define the initial trace for the interactive bar chart
-trace = go.Bar(
-    x=current_df['State'],
-    y=current_df['Total'],
-    name='Total Incidents'
-)
+    # Define the initial trace for the interactive bar chart
+    trace = go.Bar(
+        x=current_df['State'],
+        y=current_df['Total'],
+        name='Total Incidents'
+    )
 
-# Create the figure for the interactive bar chart
-fig = go.Figure(data=[trace], layout=layout)
+    # Create the figure for the interactive bar chart
+    fig = go.Figure(data=[trace], layout=layout)
 
-# Display the interactive bar chart
-fig.show()
-
-top_5_dangerous
-top_5_safest
-
+    # Display the interactive bar chart
+    fig.show()

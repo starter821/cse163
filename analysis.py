@@ -8,14 +8,10 @@ we used to create the visualization for our research questions and analysis.
 """
 
 import pandas as pd
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objects as go
 
-from matplotlib import pyplot as plt
-from plotly.subplots import make_subplots
-
-import question1
+from question1 import gun_and_unemployment
+from question2 import gun_and_crime
+from question3 import create_pie_chart
 
 gun_violence_df = pd.read_csv('cse163/incident.csv')
 unemployment_df = pd.read_csv('cse163/unemployment_rate_data.csv')
@@ -27,24 +23,41 @@ unemployment_df['month'] = pd.DatetimeIndex(unemployment_df['date']).month
 unemployment_df['day'] = pd.DatetimeIndex(unemployment_df['date']).day
 
 # year, month, and day from gun_violence_df violence dataframe
-gun_violence_df['year'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).year
-gun_violence_df['month'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).month
+gun_violence_df['year'] = pd.DatetimeIndex(
+    gun_violence_df['Incident_Date']).year
+gun_violence_df['month'] = pd.DatetimeIndex(
+    gun_violence_df['Incident_Date']).month
 gun_violence_df['day'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).day
 
+
 def main():
-    question1.gun_and_unemployment(gun_violence_df, unemployment_df)
+    # Quesiton 1
+    gun_and_unemployment(gun_violence_df, unemployment_df)
 
+    # Question 2
+    gun_and_crime(gun_violence_df, violent_crime_df)
 
+    # Question 3
+    year_input = input('Enter a year between 2015 and 2021 (or "q" to quit): ')
 
+    if year_input.lower() == 'q':
+        print('Program has been shut down :D')
+
+    # Easter Egg
+    elif year_input.lower() == 'go':
+        print('Huskies!')
+    else:
+        if not year_input.isnumeric():
+            print('Invalid input. Please enter a valid year (e.g. 2015) or "q" to quit.')
+        else:
+            year = int(year_input)
+            if year < 2015 or year > 2021:
+                print('Invalid input. Please enter a year between 2015 and 2021.')
+            else:
+                fig = create_pie_chart(gun_violence_df, year)
+
+    fig.show()
 
 
 if __name__ == '__main__':
     main()
-
-
-# main
-# question1.function(dataframe)
-# question2.function(dataframe)
-# question3.function(dataframe)
-
-

@@ -35,16 +35,22 @@ gun['month'] = pd.DatetimeIndex(gun['Incident_Date']).month
 gun['day'] = pd.DatetimeIndex(gun['Incident_Date']).day
 
 
-def gun_and_unemployment(gun: pd.dataFrame, unemployment: pd.dataFrame) -> None:
+def gun_and_unemployment(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
+    '''
+    This method takes in two dataframes, secifically the gun violence dataset
+    and unemployment dataset. It then cre
+    '''
     # add 'both' column that contains the sum of 'Injured' and 'Killed' column
     gun['both'] = gun['Injured'] + gun['Killed']
-    
+
     # group them by year & month
     gun2 = gun.groupby(['year', 'month'], as_index=False)['both'].sum()
-    unemployment2 = unemployment.groupby(['year', 'month'], as_index=False)['unrate'].mean()
+    unemployment2 = unemployment.groupby(
+        ['year', 'month'], as_index=False)['unrate'].mean()
 
     # filter unemployment from 2014 - 2021
-    year_mask = (unemployment2['year'] >= 2014) & (unemployment2['year'] <= 2021)
+    year_mask = (unemployment2['year'] >= 2014) & (
+        unemployment2['year'] <= 2021)
     unemployment2 = unemployment2[year_mask]
 
     # filter gun_violence from 2014 - 2021
@@ -53,11 +59,14 @@ def gun_and_unemployment(gun: pd.dataFrame, unemployment: pd.dataFrame) -> None:
 
     # create date column with format of YYYY-MM
     gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
-    unemployment2['date'] = unemployment2['year'].astype(str) + "-" + unemployment2['month'].astype(str)
+    unemployment2['date'] = unemployment2['year'].astype(
+        str) + "-" + unemployment2['month'].astype(str)
 
     # plot the data
-    first_line = go.Scatter(x=gun2['date'], y=gun2['both'], name='gun violence')
-    second_line = go.Scatter(x=unemployment2['date'], y=unemployment2['unrate'], name='unemployment rate')
+    first_line = go.Scatter(
+        x=gun2['date'], y=gun2['both'], name='gun violence')
+    second_line = go.Scatter(
+        x=unemployment2['date'], y=unemployment2['unrate'], name='unemployment rate')
 
     fig = make_subplots(rows=2, cols=1, x_title='Year', shared_xaxes=True)
     fig.add_trace(first_line, row=1, col=1)
