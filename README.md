@@ -1,4 +1,4 @@
-# CSE163: Analyzing the relationships between gun violence, violent crimes, and unemployment rate
+# Analyzing the relationships between gun violence, violent crimes, and unemployment rate
 
 ### Authors: Eunji Shin, Sunghee Park, Sooho Park
 
