@@ -55,8 +55,7 @@ def main():
                 print('Invalid input. Please enter a year between 2015 and 2021.')
             else:
                 fig = create_pie_chart(gun_violence_df, year)
-
-    fig.show()
+                fig.show()
 
 
 if __name__ == '__main__':
