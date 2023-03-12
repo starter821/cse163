@@ -38,24 +38,26 @@ def main():
     gun_and_crime(gun_violence_df, violent_crime_df)
 
     # Question 3
-    year_input = input('Enter a year between 2015 and 2021 (or "q" to quit): ')
+    a = True
+    while a:
+        year_input = input('Enter a year between 2015 and 2021 (or "q" to quit): ')
 
-    if year_input.lower() == 'q':
-        print('Program has been shut down :D')
-
-    # Easter Egg
-    elif year_input.lower() == 'go':
-        print('Huskies!')
-    else:
-        if not year_input.isnumeric():
-            print('Invalid input. Please enter a valid year (e.g. 2015) or "q" to quit.')
+        if year_input.lower() == 'q':
+            print('Program has been shut down :D')
+            a = False
+        # Easter Egg
+        elif year_input.lower() == 'go':
+            print('Huskies!')
         else:
-            year = int(year_input)
-            if year < 2015 or year > 2021:
-                print('Invalid input. Please enter a year between 2015 and 2021.')
+            if not year_input.isnumeric():
+                print('Invalid input. Please enter a valid year (e.g. 2015) or "q" to quit.')
             else:
-                fig = create_pie_chart(gun_violence_df, year)
-                fig.show()
+                year = int(year_input)
+                if year < 2015 or year > 2021:
+                    print('Invalid input. Please enter a year between 2015 and 2021.')
+                else:
+                    fig = create_pie_chart(gun_violence_df, year)
+                    fig.show()
 
 
 if __name__ == '__main__':
