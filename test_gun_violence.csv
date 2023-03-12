@@ -1,0 +1,50 @@
+incident_ID,Incident_Date,State_Code,City_Or_County,Address,Killed,Injured
+92158,2014-01-01,VA,Cleveland,600 block of Gravel Lick Rd,1,0
+117884,2014-03-24,IA,Des Moines,East 22nd Street and Park Ave,0,0
+134760,2014-05-14,KY,Lexington,3400 block of Lansdowne Dr,0,0
+158309,2014-07-10,NY,Brooklyn,Avenue K and Rockaway Parkway,0,1
+191878,2014-09-17,IN,Griffith,222 W. Ridge Rd,0,0
+221725,2014-11-05,DE,Wilmington,200 block of Atlantic Avenue,0,0
+286761,2015-02-01,SC,Columbia,Emanuel Church Road,1,0
+331422,2015-04-29,MO,Saint Louis,10113 Crown Point Dr,0,0
+360497,2015-06-19,IL,Chicago,7600 block of South Sangamon Street,0,2
+360501,2015-06-18,IL,Chicago,700 block of West 59th Street,0,1
+398892,2015-08-21,IL,Chicago,8900 block of South Escanaba Avenue,0,1
+438553,2015-10-29,OH,Toledo,Tecumseh Street and Junction Avenue,0,1
+464152,2015-12-13,CT,New Britain,450 South Main Street,1,0
+477662,2016-01-03,FL,Miami,2810 Northwest 12th Avenue,0,1
+524293,2016-03-18,CO,Colorado Springs,100 block of South Academy Boulevard,0,3
+565907,2016-05-26,TX,San Antonio,7100 block of Glen Heights,1,1
+597005,2016-07-07,IN,Anderson,1716 S. Scatterfield Road,0,0
+649920,2016-09-17,TX,Lubbock,1719 Buddy Holly,0,1
+699592,2016-11-14,NY,Brooklyn,90 Manhattan Ave,0,3
+746980,2017-02-10,CA,Fresno,2100 block of S Ivy Ave,0,0
+787422,2017-04-14,AZ,Phoenix,4200 block of N 67th Ln,1,1
+864400,2017-06-08,NJ,Trenton,Stuyvesant Avenue,1,0
+913577,2017-08-15,AZ,Goodyear,N 152nd Dr and W Pierson St,0,1
+976192,2017-10-30,FL,Fort Lauderdale,1600 Block of NW 24th Ave,0,1
+1013915,2017-12-25,IL,Chicago,8100 S Wabash Ave,1,0
+1021515,2018-01-06,IL,Chicago,2800 N California Ave,0,1
+1072672,2018-03-18,OH,Columbus,2300 block of Vendome Dr,0,1
+1109500,2018-05-07,IN,Richmond,1725 E Main S,0,0
+1161856,2018-07-12,PA,Philadelphia,5200 block of Rodman St,0,2
+1215879,2018-09-23,IL,Chicago,100 block of E 75th St,0,2
+1263950,2018-11-27,TX,Houston,12300 block of Bellaire Blvd,1,1
+1319816,2019-02-05,FL,Eustis,40724 Dee St,1,0
+1370030,2019-04-13,NJ,Paterson,210 Walnut St,0,1
+1434900,2019-06-29,NY,Brooklyn,Canarsie Rd and Avenue N,0,2
+1491578,2019-08-21,KY,Louisville,Dixie Hwy and Wilson Ave,0,1
+1516380,2019-10-01,OH,Dayton,Germantown St and W 3rd St,1,0
+1567410,2019-12-09,NV,Las Vegas,5300 block of E Flamingo Rd,0,1
+1593623,2020-01-11,MD,Baltimore,6300 block of Boston St,0,2
+1640448,2020-03-16,NC,Charlotte,Dinadan Dr,0,1
+1687230,2020-05-24,CA,Los Angeles,Whittier Blvd and S Lorena St,0,2
+1733110,2020-07-13,CT,New Haven,Greenwich St,0,2
+1794449,2020-09-14,OR,Portland,3000 block of SE 9th Ave,0,1
+1855666,2020-11-19,WA,Spokane,303 W North River Dr,0,2
+1918720,2021-02-01,WA,Valley,33624 Waitts Lake Rd,1,0
+1973642,2021-04-10,IL,Chicago,2100 block of S Kostner Ave,0,1
+2035368,2021-06-15,TX,Spring,23770 Springwoods Village Pkwy,2,0
+2091447,2021-08-15,IL,Chicago,700 block of W 69th St,0,1
+2141830,2021-10-15,GA,Stone Mountain,500 block of Mount Vista Rd,1,0
+2181352,2021-12-03,IL,Chicago,8200 S Blackstone Ave,0,1
