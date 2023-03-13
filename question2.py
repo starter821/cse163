@@ -98,8 +98,8 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
         gun_violence, left_on='State', right_on='State_Code')
     crime_gun_merged['Total'] = crime_gun_merged['gun_total'] + \
         crime_gun_merged['Data.Totals.Violent.All']
-    crime_gun_merged['Total_per_person'] = crime_gun_merged['Total'] /
-        crime_gun_merged['Data.Population'])
+    crime_gun_merged['Total_per_person'] = \
+        crime_gun_merged['Total'] / crime_gun_merged['Data.Population']
 
     top_5_dangerous = crime_gun_merged.nlargest(5, 'Total_per_person')
     top_5_safest = crime_gun_merged.nsmallest(5, 'Total_per_person')
