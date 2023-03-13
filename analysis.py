@@ -13,9 +13,9 @@ from question1 import gun_and_unemployment_line, gun_and_unemployment_scatter
 from question2 import gun_and_crime
 from question3 import create_pie_chart
 
-gun_violence_df = pd.read_csv('incident.csv')
-unemployment_df = pd.read_csv('unemployment_rate_data.csv')
-violent_crime_df = pd.read_csv('state_crime.csv')
+gun_violence_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/incident.csv') 
+unemployment_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/unemployment_rate_data.csv')
+violent_crime_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/state_crime.csv')
 
 # year, month, and day from unemployment dataframe
 unemployment_df['year'] = pd.DatetimeIndex(unemployment_df['date']).year

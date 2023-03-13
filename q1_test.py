@@ -231,8 +231,8 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
 
 def main():
     
-    gun_df = pd.read_csv('test_gun_violence.csv')
-    unemployment_df = pd.read_csv('test_unemployment.csv')
+    gun_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv')
+    unemployment_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_unemployment.csv')
 
     # year, month, and day from unemployment dataframe
     unemployment_df['year'] = pd.DatetimeIndex(unemployment_df['date']).year
