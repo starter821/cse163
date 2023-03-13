@@ -3,25 +3,37 @@
 ### Authors: Eunji Shin, Sunghee Park, Sooho Park
 
 ### Files
-We have 5 different python files and 3 original datsets : charts.py, q1_data.py, q2_data.py, q3_data.py and testing.py.
-Charts.py; incident.csv, criminal.csv, unemployment.csv imports all 3 datasets files to make charts.
-*charts.py* imports 
+We have 7 python files, 3 original datsets and 3 test dataset :
+
+*analysis.py; question1.py, question2.py, question3.py;
+q1_test.py, q2_test.py, q3_test.py;
+incident.csv, state_crime.csv, unemployment_rate_data.csv;
+test_gun_violence.csv, test_crime_dataset.csv, test_unemployment.csv*
+
+Analysis.py includes all visulizations. There are 3 differnt interactive charts.
+
+QuestionX.py files are for cleaning and organizing the original datasets. The new datsets are exported to Analysis.py.
+qx_test.py files are for testing our codes. 
+
+Incident.csv, state_crime.csv and unemployment_rate_data.csv are the original data.
+
 
 ### Instruction
-All modules will be installed as user clicks run. 
+Analysis.py includes all visulizations. There are 3 differnt interactive charts.
+QuestionX.py files are for cleaning and organizing the datasets.
 
-## In charts.py
-chart.py importing all qx_data.py for visualization.
+## Analysis.py
+Question1: As user run the codes, the html will pop up.
+           The chart includes slider which user can set the range of the period with.
+Question2: As user run the codes, the html will pop up.
+           Users can choose either 'Safest' or 'Most dangerous', and it will show the right chart.
+Question3: As user run the code, the search bar is available on console.
+           If user put number between 2015 ~ 2021, the html will pop up and show the right chart.  
 
-Question 1: User can use slider to set the range of data on the graph.
-
-Question 2: There are two choices on the bar chart that user can select "Most dangerous" and "Safest."
-            Each will show the top 5 most dangerous states or the safest states.
-
-Question 3: We provided a search bar that user can type an year in the range from 2015 to 2021.
-            In accordance with user's input, it will show the pie chart which shows proportion of top five states of each,                                                          including proprtion of sum of the other states.
-            
 ## Testing:
+q1_test: 
+q2_test: 
+q3_test: 
 
 
 
