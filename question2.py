@@ -83,7 +83,7 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
     # take only necessary columns
     gun_violence_df = gun_violence_df[gun_violence_year]
     gun_violence_df = gun_violence_df.groupby(
-        'State_Code')['Killed', 'Injured'].sum()
+        'State_Code')[['Killed', 'Injured']].sum()
     gun_violence_df['gun_total'] = gun_violence_df['Killed'] + \
         gun_violence_df['Injured']
     gun_violence = gun_violence_df.loc[:, ['gun_total']]

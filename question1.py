@@ -20,6 +20,7 @@ from matplotlib import pyplot as plt
 from plotly.subplots import make_subplots
 
 
+
 def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
     # add 'both' column that contains the sum of 'Injured' and 'Killed' column
     gun['both'] = gun['Injured'] + gun['Killed']
@@ -33,6 +34,11 @@ def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
 
     # create date column with format of YYYY-MM
     gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
+
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+    gun2['date'] = pd.to_datetime(gun2['date'])
+    gun2['date'] = gun2['date'].dt.strftime('%Y-%m')
+    gun2 = gun2.sort_values(by=['date'])
 
     return gun2
 
@@ -52,7 +58,13 @@ def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
     unemployment2['date'] = unemployment2['year'].astype(
         str) + "-" + unemployment2['month'].astype(str)
     
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+    unemployment2['date'] = pd.to_datetime(unemployment2['date'])
+    unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
+    unemployment2 = unemployment2.sort_values(by=['date'])
+    
     return unemployment2
+
 
 def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
     '''
@@ -81,10 +93,10 @@ def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> 
             rangeslider=dict(
                 visible=False
             ),
-            type="category"
+            type="date"
         ),
         xaxis2_rangeslider_visible=True,
-        xaxis2_type="category"
+        xaxis2_type="date"
     )
     fig.update_layout({'xaxis2': {'side': 'top'}})
 

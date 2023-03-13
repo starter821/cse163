@@ -3,7 +3,9 @@ Sunghee Park, Eunji Shin, Sooho Park
 CSE 163 AF
 03 - 13 - 2023
 
-This file contains testing functions 
+This file contains the data analysis of our first question, is there a
+correlation between national unemployment rate and gun violence from
+2014 to 2021? The analysis is represented with an interactive line graph
 
 """
 
@@ -15,16 +17,31 @@ import numpy as np
 from plotly.subplots import make_subplots
 
 
-def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
-    '''
-    This method takes in two dataframes, secifically the gun violence dataset
-    and unemployment dataset. It then cre
-    '''
+def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
     # add 'both' column that contains the sum of 'Injured' and 'Killed' column
     gun['both'] = gun['Injured'] + gun['Killed']
 
     # group them by year & month
     gun2 = gun.groupby(['year', 'month'], as_index=False)['both'].sum()
+
+    # filter dataset from 2014 - 2021
+    year_mask = (gun2['year'] >= 2014) & (gun2['year'] <= 2021)
+    gun2 = gun2[year_mask]
+
+    # create date column with format of YYYY-MM
+    gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
+
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+    gun2['date'] = pd.to_datetime(gun2['date'])
+    gun2['date'] = gun2['date'].dt.strftime('%Y-%m')
+    gun2 = gun2.sort_values(by=['date'])
+
+    return gun2
+
+
+def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
+
+    # group the dataset by year & month
     unemployment2 = unemployment.groupby(
         ['year', 'month'], as_index=False)['unrate'].mean()
 
@@ -33,26 +50,42 @@ def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> 
         unemployment2['year'] <= 2021)
     unemployment2 = unemployment2[year_mask]
 
-    # filter gun_violence from 2014 - 2021
-    year_mask = (gun2['year'] >= 2014) & (gun2['year'] <= 2021)
-    gun2 = gun2[year_mask]
-
     # create date column with format of YYYY-MM
-    gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
     unemployment2['date'] = unemployment2['year'].astype(
         str) + "-" + unemployment2['month'].astype(str)
+    
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+    unemployment2['date'] = pd.to_datetime(unemployment2['date'])
+    unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
+    unemployment2 = unemployment2.sort_values(by=['date'])
+    
+    return unemployment2
+
+
+def gun_and_unemployment_line(gun: pd.DataFrame,
+                              unemployment: pd.DataFrame) -> None:
+    '''
+    This method takes in two dataframes, secifically the gun violence dataset
+    and unemployment dataset. It then cre
+    '''
+    gun2 = filter_gun_data(gun)
+    unemployment2 = filter_unemployment_data(unemployment)
 
     # plot the data
     first_line = go.Scatter(
-        x=gun2['date'], y=gun2['both'], name='gun violence')
+        x=gun2['date'],
+        y=gun2['both'],
+        name='gun violence')
     second_line = go.Scatter(
-        x=unemployment2['date'], y=unemployment2['unrate'], name='unemployment rate')
+        x=unemployment2['date'],
+        y=unemployment2['unrate'],
+        name='unemployment rate')
 
     fig = make_subplots(rows=2, cols=1, x_title='Year', shared_xaxes=True)
     fig.add_trace(first_line, row=1, col=1)
     fig.add_trace(second_line, row=2, col=1)
-    fig.update_yaxes(title_text="sum of gun violence", row=1, col=1)
-    fig.update_yaxes(title_text="total unemployment rate", row=2, col=1)
+    fig.update_yaxes(title_text="gun violence", row=1, col=1)
+    fig.update_yaxes(title_text="unemployment rate", row=2, col=1)
     fig.update_layout(title='Gun Violence vs. Unemployment Rate ')
 
     # add a slider
@@ -61,31 +94,24 @@ def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> 
             rangeslider=dict(
                 visible=False
             ),
-            type="category"
+            type="date"
         ),
         xaxis2_rangeslider_visible=True,
-        xaxis2_type="category"
+        xaxis2_type="date"
     )
     fig.update_layout({'xaxis2': {'side': 'top'}})
 
     fig.show()
 
 
-def gun_and_unemployment_scatter(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
+def gun_and_unemployment_scatter(gun: pd.DataFrame,
+                                 unemployment: pd.DataFrame) -> None:
 
-    # add 'both' column that contains the sum of 'Injured' and 'Killed' column
-    gun['both'] = gun['Injured'] + gun['Killed']
+    # clean and filter data
+    unemployment2 = filter_unemployment_data(unemployment)
+    gun2 = filter_gun_data(gun)
 
-    # group them by year & month
-    gun2 = gun.groupby(['year', 'month'], as_index=False)['both'].sum()
-    unemployment2 = unemployment.groupby(
-        ['year', 'month'], as_index=False)['unrate'].mean()
-
-    # create date column with format of YYYY-MM
-    gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
-    unemployment2['date'] = unemployment2['year'].astype(
-        str) + "-" + unemployment2['month'].astype(str)
-
+    # set 'date' column as datetime type and sort accordingly
     unemployment2['date'] = pd.to_datetime(unemployment2['date'])
     unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
     unemployment2 = unemployment2.sort_values(by=['date'])
@@ -97,16 +123,17 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame, unemployment: pd.DataFrame) 
     # filter unemployment from 2014 - 2019
     year_mask_2019 = (unemployment2['year'] >= 2014) & (
         unemployment2['year'] <= 2019)
-    year_mask_2021 = (unemployment2['year'] >= 2014) & (
-        unemployment2['year'] <= 2021)
     unemployment_2019 = unemployment2[year_mask_2019]
-    unemployment_2021 = unemployment2[year_mask_2021]
 
-    # filter gun_violence from 2014 - 2021
+    # unemployment dataset from 2014 - 2021
+    unemployment_2021 = unemployment2
+
+    # filter gun_violence from 2014 - 2019
     year_mask_2019 = (gun2['year'] >= 2014) & (gun2['year'] <= 2019)
-    year_mask_2021 = (gun2['year'] >= 2014) & (gun2['year'] <= 2021)
     gun_2019 = gun2[year_mask_2019]
-    gun_2021 = gun2[year_mask_2021]
+
+    # gun dataset from 2014 - 2021
+    gun_2021 = gun2
 
     # join data -- automatically drops na
     data_2019 = gun_2019.merge(unemployment_2019, on=['date', 'year', 'month'])
@@ -200,3 +227,30 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame, unemployment: pd.DataFrame) 
     fig.data[1].visible = False
     fig.data[3].visible = False
     fig.show()
+
+
+def main():
+    
+    gun_df = pd.read_csv('test_gun_violence.csv')
+    unemployment_df = pd.read_csv('test_unemployment.csv')
+
+    # year, month, and day from unemployment dataframe
+    unemployment_df['year'] = pd.DatetimeIndex(unemployment_df['date']).year
+    unemployment_df['month'] = pd.DatetimeIndex(unemployment_df['date']).month
+    unemployment_df['day'] = pd.DatetimeIndex(unemployment_df['date']).day
+
+# year, month, and day from gun_violence_df violence dataframe
+    gun_df['year'] = pd.DatetimeIndex(
+        gun_df['Incident_Date']).year
+    gun_df['month'] = pd.DatetimeIndex(
+        gun_df['Incident_Date']).month
+    gun_df['day'] = pd.DatetimeIndex(gun_df['Incident_Date']).day
+
+    print(filter_unemployment_data(unemployment_df))
+    print(filter_gun_data(gun_df))
+    gun_and_unemployment_line(gun_df, unemployment_df)
+    gun_and_unemployment_scatter(gun_df, unemployment_df)
+
+
+if __name__ == '__main__':
+    main()
