@@ -24,8 +24,8 @@ This would be the only code that user will run, unless they want to test our cod
 Question1: As users run the codes, the html will pop up.
            The chart includes slider which user can set the range of the period with. <br />
 Question2: As users run the codes, the html will pop up.
-           Users can choose either 'Safest' or 'Most dangerous', and it will show the right chart.
-Question3: As users run the code, the search bar is available on console. <br />
+           Users can choose either 'Safest' or 'Most dangerous', and it will show the right chart. <br />
+Question3: As users run the code, the search bar is available on console.
            If users put any year between 2015 ~ 2021, the html will pop up and show the right chart.  
 
 ### Testing:
