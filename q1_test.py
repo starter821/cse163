@@ -139,6 +139,16 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
     data_2019 = gun_2019.merge(unemployment_2019, on=['date', 'year', 'month'])
     data_2021 = gun_2021.merge(unemployment_2021, on=['date', 'year', 'month'])
 
+    # print for testing
+    print('Merged dataset from 2014 - 2019')
+    print(data_2019)
+    print()
+
+    # print for testing
+    print('Merged dataset from 2014 - 2021')
+    print(data_2021)
+    print()
+
     # Initialize figure
     fig = go.Figure()
 
@@ -246,11 +256,18 @@ def main():
         gun_df['Incident_Date']).month
     gun_df['day'] = pd.DatetimeIndex(gun_df['Incident_Date']).day
 
+    
+
+    print('Filtered Unemployment Sample DataFrame')
     print(filter_unemployment_data(unemployment_df))
+    print()
+
+    print('Filtered Gun Violence Sample DataFrame')
     print(filter_gun_data(gun_df))
+    print()
+
     gun_and_unemployment_line(gun_df, unemployment_df)
     gun_and_unemployment_scatter(gun_df, unemployment_df)
-
 
 if __name__ == '__main__':
     main()
