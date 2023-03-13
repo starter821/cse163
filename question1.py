@@ -51,7 +51,8 @@ def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
     # create date column with format of YYYY-MM
     unemployment2['date'] = unemployment2['year'].astype(
         str) + "-" + unemployment2['month'].astype(str)
-
+    
+    return unemployment2
 
 def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
     '''
