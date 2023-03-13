@@ -18,19 +18,19 @@ qx_test.py files are for testing our codes.
 Incident.csv, state_crime.csv and unemployment_rate_data.csv are the original data.
 
 
-### Instruction
+## Instruction
 Analysis.py includes all visulizations. There are 3 differnt interactive charts.
 QuestionX.py files are for cleaning and organizing the datasets.
 
-## Analysis.py
+### Analysis.py
 Question1: As user run the codes, the html will pop up.
-           The chart includes slider which user can set the range of the period with.
+           The chart includes slider which user can set the range of the period with. <br \>
 Question2: As user run the codes, the html will pop up.
            Users can choose either 'Safest' or 'Most dangerous', and it will show the right chart.
-Question3: As user run the code, the search bar is available on console.
+Question3: As user run the code, the search bar is available on console. <br \>
            If user put number between 2015 ~ 2021, the html will pop up and show the right chart.  
 
-## Testing:
+### Testing:
 q1_test: 
 q2_test: 
 q3_test: 
