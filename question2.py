@@ -119,7 +119,7 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
     layout = go.Layout(
         title='Top 5 Safest or Most Dangerous States',
         xaxis=dict(title='State'),
-        yaxis=dict(title='Total Incidents'),
+        yaxis=dict(title='Total Incidents per population'),
         updatemenus=[
             dict(
                 buttons=list([
