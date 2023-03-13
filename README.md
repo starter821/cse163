@@ -19,10 +19,10 @@ Incident.csv, state_crime.csv and unemployment_rate_data.csv are the original da
 
 
 ## Instruction
+### Analysis.py
 Analysis.py is our main .py files which includes all of our visualizations.
 This would be the only code that user will run, unless they want to test our code using qx_text.py files.
 
-### Analysis.py
 Question1: As users run the codes, the html will pop up.
            The chart includes slider which user can set the range of the period with. <br />
 Question2: As users run the codes, the html will pop up.
