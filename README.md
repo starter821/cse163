@@ -2,20 +2,18 @@
 
 ### Authors: Eunji Shin, Sunghee Park, Sooho Park
 
-## Files
-We have 7 python files, 3 original datsets and 3 test dataset :
+## Files 
 
-*analysis.py; question1.py, question2.py, question3.py;
-q1_test.py, q2_test.py, q3_test.py;
-incident.csv, state_crime.csv, unemployment_rate_data.csv;
-test_gun_violence.csv, test_crime_dataset.csv, test_unemployment.csv*
+main: *analysis.py;* <br />
+Data cleaning: *question1.py, question2.py, question3.py;* <br />
+Testing: *q1_test.py, q2_test.py, q3_test.py;* <br />
+Original datasets: *incident.csv, state_crime.csv, unemployment_rate_data.csv;* <br />
+Testing datasets: *test_gun_violence.csv, test_crime_dataset.csv, test_unemployment.csv*
 
 Analysis.py includes all visulizations. There are 3 differnt interactive charts.
-
-QuestionX.py files are for cleaning and organizing the original datasets. The new datsets are exported to Analysis.py.
+questionX.py files are for cleaning and organizing the original datasets. The new datasets are imported by Analysis.py. <br />
 qx_test.py files are for testing our codes. 
 
-Incident.csv, state_crime.csv and unemployment_rate_data.csv are the original data.
 
 
 ## Instruction
