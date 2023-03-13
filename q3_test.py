@@ -15,7 +15,7 @@ through interactive pie charts
 import pandas as pd
 import plotly.express as px
 
-test_data = pd.read_csv('/Users/soohopark/Desktop/cse163/test_gun_violence.csv')
+test_data = pd.read_csv('/cse163/test_gun_violence.csv')
 
 
 # Create a pie chart for a given year
