@@ -111,15 +111,6 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
     unemployment2 = filter_unemployment_data(unemployment)
     gun2 = filter_gun_data(gun)
 
-    # set 'date' column as datetime type and sort accordingly
-    unemployment2['date'] = pd.to_datetime(unemployment2['date'])
-    unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
-    unemployment2 = unemployment2.sort_values(by=['date'])
-
-    gun2['date'] = pd.to_datetime(gun2['date'])
-    gun2['date'] = gun2['date'].dt.strftime('%Y-%m')
-    gun2 = gun2.sort_values(by=['date'])
-
     # filter unemployment from 2014 - 2019
     year_mask_2019 = (unemployment2['year'] >= 2014) & (
         unemployment2['year'] <= 2019)
