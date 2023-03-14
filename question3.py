@@ -3,10 +3,10 @@ Sunghee Park, Eunji Shin, Sooho Park
 CSE 163 AF
 03 - 13 - 2023
 
-This file contains the data analysis of our first question, what is the proportion 
-of the top 5 states with the highest gun violence to the total number of gun
-violence in the United States from 2015 to 2021? The analysis is represented
-through interactive pie charts 
+This file contains the data analysis of our third question, what is the
+proportion of the top 5 states with the highest gun violence to the total
+number of gun violence in the United States from 2015 to 2021?
+The analysis is represented through interactive pie charts
 """
 
 import pandas as pd
@@ -42,6 +42,7 @@ def create_pie_chart(data: pd.DataFrame, year: int) -> None:
 
     # Create a pie chart
     fig = px.pie(combined_states, values=combined_states,
-                 names=combined_states.index, title=f'Gun Violence Cases by State ({year})')
+                 names=combined_states.index,
+                 title=f'Gun Violence Cases by State ({year})')
 
     return fig

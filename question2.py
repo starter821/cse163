@@ -3,17 +3,15 @@ Sunghee Park, Eunji Shin, Sooho Park
 CSE 163 AF
 03 - 13 - 2023
 
-This file contains the data analysis of our first question, What are the 5 most
+This file contains the data analysis of our second question, What are the 5 most
 dangerous and safest states based on the total number of gun violence and
 violent crime cases in 2018? The analysis is represented with an interactive
-bar chart
+bar chart.
 """
 
 import pandas as pd
 import seaborn as sns
-import plotly.express as px
 import plotly.graph_objs as go
-from matplotlib import pyplot as plt
 
 sns.set()
 
@@ -106,7 +104,8 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
 
     options = ['Safest', 'Most Dangerous']
 
-    # Define a dictionary that maps the options to the corresponding top 5 data frames
+    # Define a dictionary that maps the options
+    # to the corresponding top 5 data frames
     data_frames = {
         'Safest': crime_gun_merged.nsmallest(5, 'Total_per_person'),
         'Most Dangerous': crime_gun_merged.nlargest(5, 'Total_per_person')

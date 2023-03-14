@@ -11,14 +11,11 @@ correlation between national unemployment rate and gun violence from
 
 
 import pandas as pd
-import seaborn as sns
-import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 
 from matplotlib import pyplot as plt
 from plotly.subplots import make_subplots
-
 
 
 def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
