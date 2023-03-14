@@ -5,6 +5,7 @@ CSE 163 AF
 
 This file contains the data processing and cleaning up the data, and code
 we used to create the visualization for our research questions and analysis.
+The codes are imported from each question files.
 """
 
 import pandas as pd
@@ -13,9 +14,12 @@ from question1 import gun_and_unemployment_line, gun_and_unemployment_scatter
 from question2 import gun_and_crime
 from question3 import create_pie_chart
 
-GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/incident.csv'
-UNEMPLOYMENT = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/unemployment_rate_data.csv'
-CRIME = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/state_crime.csv'
+GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/\
+    cse163/main/datasets/incident.csv'
+UNEMPLOYMENT = 'https://raw.githubusercontent.com/starter821/\
+    cse163/main/datasets/unemployment_rate_data.csv'
+CRIME = 'https://raw.githubusercontent.com/starter821/\
+    cse163/main/datasets/state_crime.csv'
 
 
 def main():
