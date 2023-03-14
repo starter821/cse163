@@ -6,7 +6,6 @@ CSE 163 AF
 This file contains the data analysis of our first question, is there a
 correlation between national unemployment rate and gun violence from
 2014 to 2021? The analysis is represented with an interactive line graph
-
 """
 
 
@@ -18,6 +17,11 @@ from plotly.subplots import make_subplots
 
 
 def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
+    '''
+    The method takes in a dataFrame, specifically gun dataframe, and filters
+    the dataframe to be used in plotting the charts. It returns the
+    filtered dataFrame.
+    '''
     # add 'both' column that contains the sum of 'Injured' and 'Killed' column
     gun['both'] = gun['Injured'] + gun['Killed']
 
@@ -40,7 +44,11 @@ def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
 
 
 def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
-
+    '''
+    The method takes in a dataFrame, specifically unemployment dataFrame,
+    and filters it to be used in plotting the charts. It returns the
+    filtered dataFrame.
+    '''
     # group the dataset by year & month
     unemployment2 = unemployment.groupby(
         ['year', 'month'], as_index=False)['unrate'].mean()
@@ -65,8 +73,10 @@ def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
 def gun_and_unemployment_line(gun: pd.DataFrame,
                               unemployment: pd.DataFrame) -> None:
     '''
-    This method takes in two dataframes, secifically the gun violence dataset
-    and unemployment dataset. It then cre
+    This method takes in two dataframes, specifically the gun violence
+    and unemployment dataFrame. It then creates the line chart portraying
+    the regression of each dataset with a slider that can filter the
+    range of years. It returns nothing.
     '''
     gun2 = filter_gun_data(gun)
     unemployment2 = filter_unemployment_data(unemployment)
@@ -81,9 +91,12 @@ def gun_and_unemployment_line(gun: pd.DataFrame,
         y=unemployment2['unrate'],
         name='unemployment rate')
 
+    # make subplot for two graphs to be on the same page.
     fig = make_subplots(rows=2, cols=1, x_title='Year', shared_xaxes=True)
     fig.add_trace(first_line, row=1, col=1)
     fig.add_trace(second_line, row=2, col=1)
+
+    # add title and labels
     fig.update_yaxes(title_text="gun violence", row=1, col=1)
     fig.update_yaxes(title_text="unemployment rate", row=2, col=1)
     fig.update_layout(title='Gun Violence vs. Unemployment Rate ')
@@ -106,19 +119,17 @@ def gun_and_unemployment_line(gun: pd.DataFrame,
 
 def gun_and_unemployment_scatter(gun: pd.DataFrame,
                                  unemployment: pd.DataFrame) -> None:
-
+    '''
+    This method takes in two dataframes, specifically the gun violence
+    and unemployment dataFrame. It then creates a scatter plot portraying
+    the correlation between the number of gun violence and the
+    unemployment rate. It also creates a drop down menu where
+    the user can choose and compare between correlation of them between
+    2014 - 2019 and 2014 - 2021
+    '''
     # clean and filter data
     unemployment2 = filter_unemployment_data(unemployment)
     gun2 = filter_gun_data(gun)
-
-    # set 'date' column as datetime type and sort accordingly
-    unemployment2['date'] = pd.to_datetime(unemployment2['date'])
-    unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
-    unemployment2 = unemployment2.sort_values(by=['date'])
-
-    gun2['date'] = pd.to_datetime(gun2['date'])
-    gun2['date'] = gun2['date'].dt.strftime('%Y-%m')
-    gun2 = gun2.sort_values(by=['date'])
 
     # filter unemployment from 2014 - 2019
     year_mask_2019 = (unemployment2['year'] >= 2014) & (
@@ -142,7 +153,7 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
     # Initialize figure
     fig = go.Figure()
 
-    # Add Traces
+    # Add Traces -- create the scatter plot
     fig.add_trace(
         go.Scatter(x=data_2019['both'],
                    y=data_2019['unrate'],
@@ -197,7 +208,7 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
         )
     )
 
-    # add labels
+    # add title and labels
     fig.update_layout(
         title='Correlation between Gun Violence and Unemployment Rate',
         xaxis=dict(
@@ -208,7 +219,7 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
         )
     )
 
-    # menus
+    # add drop down menus
     fig.update_layout(
         updatemenus=[
             dict(
@@ -223,7 +234,9 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
                 ]),
             )
         ])
-
+    # make the first graph visible as default when first ran
     fig.data[1].visible = False
     fig.data[3].visible = False
+
+    # show the graph
     fig.show()
