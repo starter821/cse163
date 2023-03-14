@@ -15,9 +15,11 @@ import plotly.express as px
 TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
 
 
-# Create a pie chart for a given year
 def create_pie_chart(data: pd.DataFrame, year: int) -> None:
     # Convert the Incident_Date to a datetime object
+    """
+    Create the chart for a given number. Year parameter is decided by the user's input.
+    """
     data['Incident_Date'] = pd.to_datetime(data['Incident_Date'])
 
     # Filter the data from 2015 to 2021
