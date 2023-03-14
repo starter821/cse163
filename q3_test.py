@@ -18,7 +18,7 @@ TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/da
 def create_pie_chart(data: pd.DataFrame, year: int) -> None:
     # Convert the Incident_Date to a datetime object
     """
-    Create the chart for a given number. Year parameter is decided by the user's input.
+    Create the chart for a given number. The year parameter is decided by the user's input.
     """
     data['Incident_Date'] = pd.to_datetime(data['Incident_Date'])
 
@@ -49,7 +49,10 @@ def create_pie_chart(data: pd.DataFrame, year: int) -> None:
                  title=f'Gun Violence Cases by State ({year})')
     return fig
 
-
+"""
+User can input the specific year between 2015 and 2021.
+Determined by user’s input, the pie chart of the specific year is shown on HTML.
+"""
 a = True
 while a:
     year_input = input('Enter a year between 2015 and 2021 (or "q" to quit): ')
