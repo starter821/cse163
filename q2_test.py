@@ -3,10 +3,11 @@ Sunghee Park, Eunji Shin, Sooho Park
 CSE 163 AF
 03 - 13 - 2023
 
-This file contains the data analysis of our second question, What are the 5 most
-dangerous and safest states based on the total number of incidents
-(gun violence and violent crime cases) per population in 2018?
-The analysis is represented with an interactive bar chart.
+This file contains the data analysis of our second question,
+What are the 5 most dangerous and safest states based on the
+total number of incidents (gun violence and violent crime cases)
+per population in 2018? The analysis is represented with an
+interactive bar chart.
 """
 
 
@@ -15,6 +16,10 @@ import seaborn as sns
 import plotly.graph_objs as go
 
 sns.set()
+
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
+TEST_CRIME = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_crime_dataset.csv'
+
 
 state_dict = {
     'Alabama': 'AL',
@@ -74,7 +79,8 @@ def convert_state(state_name):
     return state_dict.get(state_name)
 
 
-def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame) -> None:
+def gun_and_crime(gun_violence_df: pd.DataFrame,
+                  violent_crime_df: pd.DataFrame) -> None:
     # filter both dataframe so it only contains data in 2018
     gun_violence_year = gun_violence_df['year'] == 2018
     violent_crime_year = violent_crime_df['Year'] == 2018
@@ -106,7 +112,8 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
     print("Merged dataset:")
     print(crime_gun_merged)
 
-    # Define a dictionary that maps the options to the corresponding top 5 data frames
+    # Define a dictionary that maps the options to the
+    # corresponding top 5 data frames
     data_frames = {
         'Safest': crime_gun_merged.nsmallest(5, 'Total_per_capita'),
         'Most Dangerous': crime_gun_merged.nlargest(5, 'Total_per_capita')
@@ -133,8 +140,10 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
                     dict(
                         label='Most Dangerous',
                         method='update',
-                        args=[{'y': [data_frames['Most Dangerous']['Total_per_capita']],
-                              'x': [data_frames['Most Dangerous']['State']],
+                        args=[{'y': [data_frames['Most Dangerous']
+                                     ['Total_per_capita']],
+                              'x': [data_frames['Most Dangerous']
+                                    ['State']],
                                'type': 'bar',
                                'name': 'Total Incidents'}])
                 ]),
@@ -160,9 +169,9 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
 
 
 def main():
-    
-    gun_violence_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv')
-    violent_crime_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_crime_dataset.csv')
+
+    gun_violence_df = pd.read_csv(TEST_GUN_VIOLENCE)
+    violent_crime_df = pd.read_csv(TEST_CRIME)
 
     # year, month, and day from gun_violence_df violence dataframe
     gun_violence_df['year'] = pd.DatetimeIndex(
@@ -171,7 +180,7 @@ def main():
         gun_violence_df['Incident_Date']).month
     gun_violence_df['day'] = pd.DatetimeIndex(
         gun_violence_df['Incident_Date']).day
-    
+
     gun_and_crime(gun_violence_df, violent_crime_df)
 
 
