@@ -12,9 +12,13 @@ These files are for cleaning and organizing the original datasets, and also cont
 **Testing**: *q1_test.py, q2_test.py, q3_test.py;* <br />
 These files are for testing purposes. Each file tests the questionX.py file accordingly with the question number.
 
-**Datasets Folder**: <br />
-**Original datasets**: *incident.csv, state_crime.csv, unemployment_rate_data.csv;* <br />
-**Testing datasets**: *test_gun_violence.csv, test_crime_dataset.csv, test_unemployment.csv*
+### Datasets Folder: <br />
+**Original datasets**: <br />
+*incident.csv*: US Gun Violence Dataset <br />
+*state_crime.csv*: US State Crime Dataset <br />
+*unemployment_rate_data.csv*: US Unemployment Data <br />
+**Testing datasets**: <br />
+*test_gun_violence.csv, test_crime_dataset.csv, test_unemployment.csv*
 
 
 
