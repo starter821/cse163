@@ -12,7 +12,8 @@ The analysis is represented through interactive pie charts
 import pandas as pd
 import plotly.express as px
 
-TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/' \
+    'cse163/main/datasets/test_gun_violence.csv'
 
 
 def create_pie_chart(data: pd.DataFrame, year: int) -> None:

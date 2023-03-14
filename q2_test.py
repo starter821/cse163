@@ -17,8 +17,10 @@ import plotly.graph_objs as go
 
 sns.set()
 
-TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
-TEST_CRIME = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_crime_dataset.csv'
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/' \
+    'cse163/main/datasets/test_gun_violence.csv'
+TEST_CRIME = 'https://raw.githubusercontent.com/starter821/' \
+    'cse163/main/datasets/test_crime_dataset.csv'
 
 
 state_dict = {

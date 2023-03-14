@@ -15,8 +15,10 @@ import numpy as np
 
 from plotly.subplots import make_subplots
 
-TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
-TEST_UNEMPLOYMENT = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_unemployment.csv'
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/' \
+    'cse163/main/datasets/test_gun_violence.csv'
+TEST_UNEMPLOYMENT = 'https://raw.githubusercontent.com/starter821/' \
+    'cse163/main/datasets/test_unemployment.csv'
 
 
 def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
