@@ -15,7 +15,9 @@ import plotly.express as px
 
 # Create a pie chart for a given year
 def create_pie_chart(data: pd.DataFrame, year: int) -> None:
-
+    """
+    Create the chart for a given year. The year parameter is decided by the user's input.
+    """
     # Convert the Incident_Date to a datetime object
     data['Incident_Date'] = pd.to_datetime(data['Incident_Date'])
 
