@@ -51,7 +51,7 @@ def create_pie_chart(data: pd.DataFrame, year: int) -> None:
 
 """
 User can input the specific year between 2015 and 2021.
-Determined by user’s input, the pie chart of a specific year is shown on HTML.
+Determined by user’s input, the pie chart of the year is shown on HTML.
 """
 a = True
 while a:
