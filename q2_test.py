@@ -87,12 +87,14 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
     gun_violence_df['gun_total'] = gun_violence_df['Killed'] + \
         gun_violence_df['Injured']
     gun_violence = gun_violence_df.loc[:, ['gun_total']]
+    print(gun_violence)
 
     violent_crime_df = violent_crime_df[violent_crime_year]
     violent_crime_df = violent_crime_df.loc[:, [
         'State', 'Data.Population', 'Data.Totals.Violent.All']]
     violent_crime_df['State'] = violent_crime_df['State'].apply(convert_state)
     violent_crime = violent_crime_df.dropna()
+    print(violent_crime)
 
     crime_gun_merged = violent_crime.merge(
         gun_violence, left_on='State', right_on='State_Code')
