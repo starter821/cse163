@@ -87,6 +87,7 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
     gun_violence_df['gun_total'] = gun_violence_df['Killed'] + \
         gun_violence_df['Injured']
     gun_violence = gun_violence_df.loc[:, ['gun_total']]
+    print("Gun violence dataset:")
     print(gun_violence)
 
     violent_crime_df = violent_crime_df[violent_crime_year]
@@ -94,6 +95,7 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
         'State', 'Data.Population', 'Data.Totals.Violent.All']]
     violent_crime_df['State'] = violent_crime_df['State'].apply(convert_state)
     violent_crime = violent_crime_df.dropna()
+    print("Violent crime dataset:")
     print(violent_crime)
 
     crime_gun_merged = violent_crime.merge(
@@ -102,6 +104,7 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
         crime_gun_merged['Data.Totals.Violent.All']
     crime_gun_merged['Total_per_capita'] = \
         crime_gun_merged['Total'] / crime_gun_merged['Data.Population']
+    print("Merged dataset:")
     print(crime_gun_merged)
 
     top_5_dangerous = crime_gun_merged.nlargest(5, 'Total_per_capita')
