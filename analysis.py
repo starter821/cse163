@@ -4,7 +4,7 @@ CSE 163 AF
 03 - 13 - 2023
 
 This file contains the data processing and cleaning up the data, and code
-we used to create the visualization for our research questions and analysis. 
+we used to create the visualization for our research questions and analysis.
 """
 
 import pandas as pd
@@ -20,7 +20,7 @@ CRIME = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/state
 
 def main():
     # Read files
-    gun_violence_df = pd.read_csv(GUN_VIOLENCE) 
+    gun_violence_df = pd.read_csv(GUN_VIOLENCE)
     unemployment_df = pd.read_csv(UNEMPLOYMENT)
     violent_crime_df = pd.read_csv(CRIME)
 
@@ -34,8 +34,9 @@ def main():
         gun_violence_df['Incident_Date']).year
     gun_violence_df['month'] = pd.DatetimeIndex(
         gun_violence_df['Incident_Date']).month
-    gun_violence_df['day'] = pd.DatetimeIndex(gun_violence_df['Incident_Date']).day
-    
+    gun_violence_df['day'] = pd.DatetimeIndex(
+        gun_violence_df['Incident_Date']).day
+
     # Quesiton 1
     gun_and_unemployment_line(gun_violence_df, unemployment_df)
     gun_and_unemployment_scatter(gun_violence_df, unemployment_df)
@@ -46,7 +47,8 @@ def main():
     # Question 3
     a = True
     while a:
-        year_input = input('Enter a year between 2015 and 2021 (or "q" to quit): ')
+        year_input = input('Enter a year between 2015'
+                           + ' and 2021 (or "q" to quit): ')
 
         if year_input.lower() == 'q':
             print('Program has been shut down :D')
@@ -56,11 +58,13 @@ def main():
             print('Huskies!')
         else:
             if not year_input.isnumeric():
-                print('Invalid input. Please enter a valid year (e.g. 2015) or "q" to quit.')
+                print('Invalid input' +
+                      'Please enter a valid year (e.g. 2015) or "q" to quit.')
             else:
                 year = int(year_input)
                 if year < 2015 or year > 2021:
-                    print('Invalid input. Please enter a year between 2015 and 2021.')
+                    print('Invalid input.' +
+                          'Please enter a year between 2015 and 2021.')
                 else:
                     fig = create_pie_chart(gun_violence_df, year)
                     fig.show()

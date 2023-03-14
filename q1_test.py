@@ -16,6 +16,9 @@ import numpy as np
 
 from plotly.subplots import make_subplots
 
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
+TEST_UNEMPLOYMENT = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_unemployment.csv'
+
 
 def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
     # add 'both' column that contains the sum of 'Injured' and 'Killed' column
@@ -31,7 +34,7 @@ def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
     # create date column with format of YYYY-MM
     gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
 
-    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort
     gun2['date'] = pd.to_datetime(gun2['date'])
     gun2['date'] = gun2['date'].dt.strftime('%Y-%m')
     gun2 = gun2.sort_values(by=['date'])
@@ -53,12 +56,12 @@ def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
     # create date column with format of YYYY-MM
     unemployment2['date'] = unemployment2['year'].astype(
         str) + "-" + unemployment2['month'].astype(str)
-    
-    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort
     unemployment2['date'] = pd.to_datetime(unemployment2['date'])
     unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
     unemployment2 = unemployment2.sort_values(by=['date'])
-    
+
     return unemployment2
 
 
@@ -231,24 +234,26 @@ def gun_and_unemployment_scatter(gun: pd.DataFrame,
 
 
 def main():
-    
-    gun_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv')
-    unemployment_df = pd.read_csv('https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_unemployment.csv')
+
+    gun_df = pd.read_csv(TEST_GUN_VIOLENCE)
+    unemployment_df = pd.read_csv(TEST_UNEMPLOYMENT)
 
     # year, month, and day from unemployment dataframe
-    unemployment_df['year'] = pd.DatetimeIndex(unemployment_df['date']).year
-    unemployment_df['month'] = pd.DatetimeIndex(unemployment_df['date']).month
-    unemployment_df['day'] = pd.DatetimeIndex(unemployment_df['date']).day
+    unemployment_df['year'] = pd.DatetimeIndex(
+        unemployment_df['date']).year
+    unemployment_df['month'] = pd.DatetimeIndex(
+        unemployment_df['date']).month
+    unemployment_df['day'] = pd.DatetimeIndex(
+        unemployment_df['date']).day
 
-# year, month, and day from gun_violence_df violence dataframe
+    # year, month, and day from gun_violence_df violence dataframe
     gun_df['year'] = pd.DatetimeIndex(
         gun_df['Incident_Date']).year
     gun_df['month'] = pd.DatetimeIndex(
         gun_df['Incident_Date']).month
     gun_df['day'] = pd.DatetimeIndex(gun_df['Incident_Date']).day
 
-    
-
+    # print out filtered dataframes
     print('Filtered Unemployment Sample DataFrame')
     print(filter_unemployment_data(unemployment_df))
     print()
@@ -259,6 +264,7 @@ def main():
 
     gun_and_unemployment_line(gun_df, unemployment_df)
     gun_and_unemployment_scatter(gun_df, unemployment_df)
+
 
 if __name__ == '__main__':
     main()
