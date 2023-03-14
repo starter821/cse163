@@ -98,18 +98,19 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
         gun_violence, left_on='State', right_on='State_Code')
     crime_gun_merged['Total'] = crime_gun_merged['gun_total'] + \
         crime_gun_merged['Data.Totals.Violent.All']
-    crime_gun_merged['Total_per_person'] = \
+    crime_gun_merged['Total_per_capita'] = \
         crime_gun_merged['Total'] / crime_gun_merged['Data.Population']
+    print(crime_gun_merged)
 
-    top_5_dangerous = crime_gun_merged.nlargest(5, 'Total_per_person')
-    top_5_safest = crime_gun_merged.nsmallest(5, 'Total_per_person')
+    top_5_dangerous = crime_gun_merged.nlargest(5, 'Total_per_capita')
+    top_5_safest = crime_gun_merged.nsmallest(5, 'Total_per_capita')
 
     options = ['Safest', 'Most Dangerous']
 
     # Define a dictionary that maps the options to the corresponding top 5 data frames
     data_frames = {
-        'Safest': crime_gun_merged.nsmallest(5, 'Total_per_person'),
-        'Most Dangerous': crime_gun_merged.nlargest(5, 'Total_per_person')
+        'Safest': crime_gun_merged.nsmallest(5, 'Total_per_capita'),
+        'Most Dangerous': crime_gun_merged.nlargest(5, 'Total_per_capita')
     }
 
     # Define the initial data frame to display
@@ -126,14 +127,14 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
                     dict(
                         label='Safest',
                         method='update',
-                        args=[{'y': [current_df['Total_per_person']],
+                        args=[{'y': [current_df['Total_per_capita']],
                               'x': [current_df['State']],
                                'type': 'bar',
                                'name': 'Total Incidents'}]),
                     dict(
                         label='Most Dangerous',
                         method='update',
-                        args=[{'y': [data_frames['Most Dangerous']['Total_per_person']],
+                        args=[{'y': [data_frames['Most Dangerous']['Total_per_capita']],
                               'x': [data_frames['Most Dangerous']['State']],
                                'type': 'bar',
                                'name': 'Total Incidents'}])
@@ -148,7 +149,7 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
     # Define the initial trace for the interactive bar chart
     trace = go.Bar(
         x=current_df['State'],
-        y=current_df['Total_per_person'],
+        y=current_df['Total_per_capita'],
         name='Total Incidents'
     )
 
