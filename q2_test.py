@@ -81,35 +81,46 @@ def convert_state(state_name):
 
 def gun_and_crime(gun_violence_df: pd.DataFrame,
                   violent_crime_df: pd.DataFrame) -> None:
-    # filter both dataframe so it only contains data in 2018
+    # filter gun_violence_df to only contain data in 2018
     gun_violence_year = gun_violence_df['year'] == 2018
-    violent_crime_year = violent_crime_df['Year'] == 2018
-
-    # take only necessary columns
     gun_violence_df = gun_violence_df[gun_violence_year]
+    # group them by state code
     gun_violence_df = gun_violence_df.groupby(
         'State_Code')[['Killed', 'Injured']].sum()
+    # create 'gun_total' column to sum the 'Killed' and 'Injured' columns
     gun_violence_df['gun_total'] = gun_violence_df['Killed'] + \
         gun_violence_df['Injured']
+    # take only necessary columns in gun_violence_df
     gun_violence = gun_violence_df.loc[:, ['gun_total']]
     print("Gun violence dataset:")
+    # print to test the code
     print(gun_violence)
 
+    # filter violent_crime_df to only contain data in 2018
+    violent_crime_year = violent_crime_df['Year'] == 2018
     violent_crime_df = violent_crime_df[violent_crime_year]
+    # take only necessary columns in violent_crime_df
     violent_crime_df = violent_crime_df.loc[:, [
         'State', 'Data.Population', 'Data.Totals.Violent.All']]
+    # convert state names to state abbreviations
     violent_crime_df['State'] = violent_crime_df['State'].apply(convert_state)
+    # drop non-states from the violent_crime_df
     violent_crime = violent_crime_df.dropna()
     print("Violent crime dataset:")
+    # print to test the code
     print(violent_crime)
 
+    # join the filtered violent_crime and filtered gun_violence data
     crime_gun_merged = violent_crime.merge(
         gun_violence, left_on='State', right_on='State_Code')
+    # create a 'Total' column to sum the 'gun_total' and 'Data.Totals.Violent.All' columns
     crime_gun_merged['Total'] = crime_gun_merged['gun_total'] + \
         crime_gun_merged['Data.Totals.Violent.All']
+    # create a 'Total_per_capita' column to find the violent incidents per capita
     crime_gun_merged['Total_per_capita'] = \
         crime_gun_merged['Total'] / crime_gun_merged['Data.Population']
     print("Merged dataset:")
+    # print to test code
     print(crime_gun_merged)
 
     # Define a dictionary that maps the options to the
