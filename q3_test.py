@@ -12,13 +12,15 @@ The analysis is represented through interactive pie charts
 import pandas as pd
 import plotly.express as px
 
-TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/\
+    main/datasets/test_gun_violence.csv'
 
 
 def create_pie_chart(data: pd.DataFrame, year: int) -> None:
     # Convert the Incident_Date to a datetime object
     """
-    Create the chart for a given number. The year parameter is decided by the user's input.
+    Create the chart for a given number.
+    The year parameter is decided by the user's input.
     """
     data['Incident_Date'] = pd.to_datetime(data['Incident_Date'])
 
@@ -48,6 +50,7 @@ def create_pie_chart(data: pd.DataFrame, year: int) -> None:
                  names=combined_states.index,
                  title=f'Gun Violence Cases by State ({year})')
     return fig
+
 
 """
 User can input the specific year between 2015 and 2021.

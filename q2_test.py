@@ -17,8 +17,10 @@ import plotly.graph_objs as go
 
 sns.set()
 
-TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_gun_violence.csv'
-TEST_CRIME = 'https://raw.githubusercontent.com/starter821/cse163/main/datasets/test_crime_dataset.csv'
+TEST_GUN_VIOLENCE = 'https://raw.githubusercontent.com/starter821/\
+    cse163/main/datasets/test_gun_violence.csv'
+TEST_CRIME = 'https://raw.githubusercontent.com/starter821/\
+    cse163/main/datasets/test_crime_dataset.csv'
 
 
 state_dict = {
@@ -113,10 +115,12 @@ def gun_and_crime(gun_violence_df: pd.DataFrame,
     # join the filtered violent_crime and filtered gun_violence data
     crime_gun_merged = violent_crime.merge(
         gun_violence, left_on='State', right_on='State_Code')
-    # create a 'Total' column to sum the 'gun_total' and 'Data.Totals.Violent.All' columns
+    # create a 'Total' column to sum the 'gun_total'
+    # and 'Data.Totals.Violent.All' columns
     crime_gun_merged['Total'] = crime_gun_merged['gun_total'] + \
         crime_gun_merged['Data.Totals.Violent.All']
-    # create a 'Total_per_capita' column to find the violent incidents per capita
+    # create a 'Total_per_capita' column
+    # to find the violent incidents per capita
     crime_gun_merged['Total_per_capita'] = \
         crime_gun_merged['Total'] / crime_gun_merged['Data.Population']
     print("Merged dataset:")
