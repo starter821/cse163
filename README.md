@@ -25,8 +25,8 @@ These files are for testing purposes. Each file tests the questionX.py file acco
 
 ## Instruction
 ### Run *Analysis.py*:
-Analysis.py is our main .py files which includes all of our visualizations.
-This would be the only code that user will run, unless they want to test our code using qx_text.py files.
+Analysis.py is our main.py files which includes all of our visualizations.
+This will be the only code that user will run, unless they want to test our code using qx_text.py files.
 
 When you run, first, three charts including line chart, scatter plot, and bar chart are going to pop up. To get the last interactive chart, please go back to the code and look at the console. It will ask for the year you would like to see for pie charts. Input the year and the last chart will pop up. <br />
 
