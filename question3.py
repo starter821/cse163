@@ -6,7 +6,7 @@ CSE 163 AF
 This file contains the data analysis of our third question, what is the
 proportion of the top 5 states with the highest gun violence to the total
 number of gun violence in the United States from 2015 to 2021?
-The analysis is represented through interactive pie charts
+The analysis is represented through interactive pie charts.
 """
 
 import pandas as pd
@@ -16,7 +16,7 @@ import plotly.express as px
 # Create a pie chart for a given year
 def create_pie_chart(data: pd.DataFrame, year: int) -> None:
     """
-    Create the chart for a given year. The year parameter is decided by the user's input.
+    Create the chart for a given year. The year is decided by the user's input on analysis.py.
     """
     # Convert the Incident_Date to a datetime object
     data['Incident_Date'] = pd.to_datetime(data['Incident_Date'])
