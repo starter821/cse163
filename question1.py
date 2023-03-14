@@ -14,7 +14,6 @@ import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
 
-from matplotlib import pyplot as plt
 from plotly.subplots import make_subplots
 
 
@@ -32,7 +31,7 @@ def filter_gun_data(gun: pd.DataFrame) -> pd.DataFrame:
     # create date column with format of YYYY-MM
     gun2['date'] = gun2['year'].astype(str) + "-" + gun2['month'].astype(str)
 
-    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort
     gun2['date'] = pd.to_datetime(gun2['date'])
     gun2['date'] = gun2['date'].dt.strftime('%Y-%m')
     gun2 = gun2.sort_values(by=['date'])
@@ -54,16 +53,17 @@ def filter_unemployment_data(unemployment: pd.DataFrame) -> pd.DataFrame:
     # create date column with format of YYYY-MM
     unemployment2['date'] = unemployment2['year'].astype(
         str) + "-" + unemployment2['month'].astype(str)
-    
-    # turn 'date' column into datetime type, format it to yyyy-mm and sort 
+
+    # turn 'date' column into datetime type, format it to yyyy-mm and sort
     unemployment2['date'] = pd.to_datetime(unemployment2['date'])
     unemployment2['date'] = unemployment2['date'].dt.strftime('%Y-%m')
     unemployment2 = unemployment2.sort_values(by=['date'])
-    
+
     return unemployment2
 
 
-def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
+def gun_and_unemployment_line(gun: pd.DataFrame,
+                              unemployment: pd.DataFrame) -> None:
     '''
     This method takes in two dataframes, secifically the gun violence dataset
     and unemployment dataset. It then cre
@@ -73,9 +73,13 @@ def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> 
 
     # plot the data
     first_line = go.Scatter(
-        x=gun2['date'], y=gun2['both'], name='gun violence')
+        x=gun2['date'],
+        y=gun2['both'],
+        name='gun violence')
     second_line = go.Scatter(
-        x=unemployment2['date'], y=unemployment2['unrate'], name='unemployment rate')
+        x=unemployment2['date'],
+        y=unemployment2['unrate'],
+        name='unemployment rate')
 
     fig = make_subplots(rows=2, cols=1, x_title='Year', shared_xaxes=True)
     fig.add_trace(first_line, row=1, col=1)
@@ -100,7 +104,8 @@ def gun_and_unemployment_line(gun: pd.DataFrame, unemployment: pd.DataFrame) -> 
     fig.show()
 
 
-def gun_and_unemployment_scatter(gun: pd.DataFrame, unemployment: pd.DataFrame) -> None:
+def gun_and_unemployment_scatter(gun: pd.DataFrame,
+                                 unemployment: pd.DataFrame) -> None:
 
     # clean and filter data
     unemployment2 = filter_unemployment_data(unemployment)

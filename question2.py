@@ -3,10 +3,10 @@ Sunghee Park, Eunji Shin, Sooho Park
 CSE 163 AF
 03 - 13 - 2023
 
-This file contains the data analysis of our second question, What are the 5 most
-dangerous and safest states based on the total number of gun violence and
-violent crime cases in 2018? The analysis is represented with an interactive
-bar chart.
+This file contains the data analysis of our second question, What are the
+5 most dangerous and safest states based on the total number of gun
+violence and violent crime cases in 2018? The analysis is represented
+with an interactive bar chart.
 """
 
 import pandas as pd
@@ -73,7 +73,8 @@ def convert_state(state_name):
     return state_dict.get(state_name)
 
 
-def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame) -> None:
+def gun_and_crime(gun_violence_df: pd.DataFrame,
+                  violent_crime_df: pd.DataFrame) -> None:
     # filter both dataframe so it only contains data in 2018
     gun_violence_year = gun_violence_df['year'] == 2018
     violent_crime_year = violent_crime_df['Year'] == 2018
@@ -127,8 +128,10 @@ def gun_and_crime(gun_violence_df: pd.DataFrame, violent_crime_df: pd.DataFrame)
                     dict(
                         label='Most Dangerous',
                         method='update',
-                        args=[{'y': [data_frames['Most Dangerous']['Total_per_person']],
-                              'x': [data_frames['Most Dangerous']['State']],
+                        args=[{'y': [data_frames['Most Dangerous']
+                                     ['Total_per_person']],
+                              'x': [data_frames['Most Dangerous']
+                                    ['State']],
                                'type': 'bar',
                                'name': 'Total Incidents'}])
                 ]),
