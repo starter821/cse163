@@ -30,6 +30,8 @@ This will be the only code that user will run, unless they want to test our code
 
 When you run, first, three charts including line chart, scatter plot, and bar chart are going to pop up. To get the last interactive chart, please go back to the code and look at the console. It will ask for the year you would like to see for pie charts. Input the year and the last chart will pop up. <br />
 
+please use 'base' environment from anaconda for all the imports to work correctly. 
+
 **Question1**: <br />
 As users run the codes, the html will pop up. The chart includes slider which user can set the range of the period with. <br />
 
